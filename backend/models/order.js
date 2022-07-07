@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 const oderSchema = mongoose.Schema({
   shippingInfo: {
@@ -12,11 +12,11 @@ const oderSchema = mongoose.Schema({
     },
     phoneNo: {
       type: String,
-     required: true,
+      required: true,
     },
     postalCode: {
       type: String,
-     required: true,
+      required: true,
     },
     country: {
       type: String,
@@ -26,71 +26,76 @@ const oderSchema = mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     require: true,
-    ref: 'User'
+    ref: "User",
   },
   orderItems: [
     {
       name: {
         type: String,
-        required: true
+        required: true,
       },
       quantity: {
         type: Number,
-        required: true
+        required: true,
       },
       image: {
         type: String,
-        required: true
+        required: true,
       },
-      price:{
-      type: Number,
-      required: true
+      price: {
+        type: Number,
+        required: true,
+      },
+      product: {
+        type: mongoose.Schema.Types.ObjectId,
+        require: true,
+        ref: "Product",
+      },
     },
-    product: {
-      type: mongoose.Schema.Types.ObjectId,
-      require: true,
-      ref: 'Product'
-    },
-    }
   ],
-paymentInfo: {
-  id: {
-    type: String,
+  paymentInfo: {
+    id: {
+      type: String,
     },
-  status: {
+    status: {
+      type: String,
+    },
+  },
+  paidAt: {
+    type: Date,
+  },
+  itemsPrice: {
+    type: Number,
+    required: true,
+    default: 0.0,
+  },
+  taxtPrice: {
+    type: Number,
+    required: true,
+    default: 0.0,
+  },
+  shippingPrice: {
+    type: Number,
+    required: true,
+    default: 0.0,
+  },
+  totalPrice: {
+    type: Number,
+    required: true,
+    default: 0.0,
+  },
+  orderStatus: {
     type: String,
-  }
-},
-paidAt: {
-  type: Date
-},
-itemsPrice: {
-  type: Number,
-  required : true,
-  default: 0.0,
+    required: true,
+    default: "Processing",
   },
-taxtPrice: {
-  type: Number,
-  required : true,
-  default: 0.0,
+  deliveredAt: {
+    type: Date,
   },
-shippingPrice: {
-  type: Number,
-  required : true,
-  default: 0.0,
+  createdAt: {
+    type: Date,
+    default: Date.now,
   },
-orderStatus: {
-  type: String,
-  required : true,
-  default: 'Processing',
-  },
-deliveredAt: {
-  type: Date
-},
-createdAt: {
-  type: Date,
-  default: Date.now
-}
 });
 
 module.exports = mongoose.model("Order", oderSchema);
