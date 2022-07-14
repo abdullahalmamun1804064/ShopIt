@@ -18,8 +18,8 @@ exports.newProduct = catchAsyncError(async (req, res, next) => {
 
 //Get all Product => /api/v1/products
 exports.getProduct = catchAsyncError(async (req, res, next) => {
-
-  const resPerPage = 8; 
+  
+  const resPerPage = 16; 
   
   //Total product count
   const productsCount = await Product.countDocuments();
@@ -42,16 +42,15 @@ exports.getProduct = catchAsyncError(async (req, res, next) => {
 
 exports.getSingleProduct = catchAsyncError(async (req, res, next) => {
 
-  const productr = await Product.findOne({ _id: req.params.id });
-  console.log(productr);
+  const product = await Product.findOne({ _id: req.params.id });
 
-  if (!productr) {
+  if (!product) {
     return next('Product not found', 404);
   }
   else {
     res.status(200).json({
       success: true ,
-      productr,
+      product,
     });
   }
 });

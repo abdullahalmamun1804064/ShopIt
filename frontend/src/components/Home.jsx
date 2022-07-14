@@ -1,30 +1,35 @@
 import React, { Fragment, useEffect } from "react";
-import Footer from "./layout/Footer";
-import Header from "./layout/Header";
-import Loder from './layout/Loder';
+import Loader from './layout/Loader';
 import MetaData from "./layout/MetaData";
 
 import Product from './product/Product';
 
+import { useAlert } from 'react-alert';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../actions/productActions';
 
 const Home = () => {
+
+  const alert = useAlert();
  
   const dispatch = useDispatch();
   
   const {loading, products, error, productsCount} = useSelector(state => state.products)
 
-  useEffect(()=>{
-    dispatch(getProducts());
-  }, [dispatch])
+  useEffect(() => {
+    if (error) {
+      // alert.success("success");
+          return alert.error(error)  
+        }
+        dispatch(getProducts()); 
+
+  }, [dispatch , alert , error])  
   
   return ( 
     <Fragment>
       <MetaData title={"Bye Best Product"} />
-      <Header />
-      
-      {loading ? <h1><Loder/></h1> : (
+   
+      {loading ? <h1><Loader/></h1> : (
         
       <div className="container container-fluid">
         <h1 id="products_heading">Latest Products</h1>
@@ -40,9 +45,6 @@ const Home = () => {
         </section>
       </div>
       )}
-
-
-      <Footer />
     </Fragment>
   );
 };
