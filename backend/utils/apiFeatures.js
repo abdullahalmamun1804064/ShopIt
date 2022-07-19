@@ -4,8 +4,6 @@ class APIFeatures {
     this.queryStr = queryStr;
   }
   search() {
-    // console.dir(this.queryStr);
-    // console.log(this.queryStr.keyword+"   CQk");
     const keyword = this.queryStr.keyword
       ? {
           name: {
@@ -30,7 +28,7 @@ class APIFeatures {
     let quearyStr = JSON.stringify(quearyCopy);
     quearyStr = quearyStr.replace(
       /\b(gt|gte|lt|lte)\b/g,
-      (match) => `$${match}`,
+      match => `$${match}`,
     );
     // console.log(quearyStr);
 

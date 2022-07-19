@@ -1,25 +1,23 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Footer from "./components/layout/Footer";
 
 
 import Header from './components/layout/Header';
-import ProductDeatils from "./components/product/ProductDetails";
+import ProductDetails from "./components/product/ProductDetails";
 
 function App() {
-  return (
+  return (<Router>
+    
     <div className="App">
-      <Header />
-      <Router>
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/product/:id" element={<ProductDeatils />} />
-        </Routes>
-      </Router>
-
+        <Header />
+          <Route path="/" component={Home} exact />
+          <Route path="/search/:keyword" component={Home} />
+          <Route path="/product/:id" component={ProductDetails} exact />
       <Footer />
     </div>
+      </Router >
   );
 }
 
-export default App;
+export default App; 

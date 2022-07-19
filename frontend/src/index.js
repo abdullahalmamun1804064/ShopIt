@@ -1,9 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
+import App from "./App";
 
-import { Provider } from 'react-redux';
-import store from './store';
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+import { Provider } from "react-redux";
+import store from "./store";
 
 import { positions, Provider as AlertProvider, transitions } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
@@ -14,9 +15,8 @@ const options = {
   offset: "30px",
   transition: transitions.SCALE,
 };
-  
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <Provider store={store}>
@@ -25,5 +25,3 @@ root.render(
     </AlertProvider>
   </Provider>,
 );
-
-
