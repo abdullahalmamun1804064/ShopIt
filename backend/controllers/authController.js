@@ -4,17 +4,24 @@ const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncError = require("../middlewares/catchAsyncError");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
+const cloudinary = require('cloudinary')
 
-//Register a user => /api/v1/register
+//Register a user => /api/v1/register 
 exports.registerUser = catchAsyncError(async (req, res, next) => {
+  const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: "avatars",
+    width: 150,
+    crop: "scale",
+  });
+
   const { name, email, password } = req.body; 
   const user = await User.create({
     name,
     email,
     password,
     avatar: {
-      public_id: "arab-muslim-man-beard-portrait-avatar-2116214567",
-      url: "https://www.shutterstock.com/image-vector/arabic-muslim-man-beard-portrait-wearing-2090251465",
+      public_id: result.public_id,
+      url: result.secure_url,
     },
   });
   sendToken(user, 200, res);
@@ -60,7 +67,7 @@ exports.updateProfile = catchAsyncError(async (req, res, next) => {
     email:req.body.email,
   }
 
-  //Upadate Avater : todo
+  //Upadate Avatar : todo
   const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
        new: true,
       runValidators: true,
