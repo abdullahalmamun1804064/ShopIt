@@ -9,7 +9,7 @@ import { clearError, getProductDetails } from "../../actions/productActions";
 import MetaData from "../layout/MetaData";
 
 const ProductDetails = ({ match }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); 
   const alert = useAlert();
   const { loading, error, product } = useSelector(
     (state) => state.productDetails,
@@ -28,7 +28,7 @@ const ProductDetails = ({ match }) => {
       {loading ? (
         <Loader />
       ) : (
-          <Fragment>
+          <Fragment >
           <MetaData title={product.name} />
           <div className="row f-flex justify-content-around">
             <div className="col-12 col-lg-5 img-fluid" id="product_image">
@@ -40,6 +40,7 @@ const ProductDetails = ({ match }) => {
                         className="d-block w-100"
                         src={image.url}
                         alt={product.title}
+
                       />
                     </Carousel.Item>
                   ))}

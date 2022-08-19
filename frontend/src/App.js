@@ -6,8 +6,17 @@ import Register from './components/user/Register';
 
 import Header from './components/layout/Header';
 import ProductDetails from "./components/product/ProductDetails";
+import { useEffect } from "react";
+import { loadUser } from './actions/userActions';
+import store from  "./store"
+
 
 function App() {
+  useEffect(() => {
+    store.dispatch(loadUser());
+  },[])
+
+
   return (
     <Router>
       <div className="App">

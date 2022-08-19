@@ -53,7 +53,7 @@ exports.loginUser = catchAsyncError(async (req, res, next) => {
 //Get Currently logged in user details => /api/v1/me
 exports.getUserProfile = catchAsyncError(async (req, res, next) => {
   const user = await User.findById(req.user.id);
-  console.log(user);
+  // console.log(user);
   res.status(200).json({
     success: true,
     user,
